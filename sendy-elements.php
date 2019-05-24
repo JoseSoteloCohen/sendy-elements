@@ -3,7 +3,6 @@
 /**
  * Plugin Name: Sendy Elements
  * Description: Plugin to extend Elementor forms with Sendy.
- * Plugin URI:  https://inboundlatino.com/
  * Version:     1.0.0
  * Author:      José Sotelo
  * Author URI:  https://inboundlatino.com/
@@ -15,7 +14,7 @@
  }
 
  /**
-  * Main Elementor Test Extension Class
+  * Main Sendy Elements Extension Class
   *
   * The main class that initiates and runs the plugin.
   *
@@ -30,7 +29,7 @@
  	 *
  	 * @var string The plugin version.
  	 */
- 	const VERSION = '1.0.0';
+ 	const VERSION = '1.0.1';
 
  	/**
  	 * Minimum Elementor Version
@@ -39,7 +38,7 @@
  	 *
  	 * @var string Minimum Elementor version required to run the plugin.
  	 */
- 	const MINIMUM_ELEMENTOR_VERSION = '2.0.0';
+ 	const MINIMUM_ELEMENTOR_VERSION = '2.5.0';
 
  	/**
  	 * Minimum PHP Version
@@ -48,7 +47,7 @@
  	 *
  	 * @var string Minimum PHP version required to run the plugin.
  	 */
- 	const MINIMUM_PHP_VERSION = '7.0';
+ 	const MINIMUM_PHP_VERSION = '5.4';
 
  	/**
  	 * Instance
@@ -110,7 +109,7 @@
  	 */
  	public function i18n() {
 
- 		load_plugin_textdomain( 'elementor-test-extension' );
+ 		load_plugin_textdomain( 'sendy-elements' );
 
  	}
 
@@ -165,9 +164,9 @@
 
  		$message = sprintf(
  			/* translators: 1: Plugin name 2: Elementor */
- 			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'elementor-test-extension' ),
- 			'<strong>' . esc_html__( 'Elementor Test Extension', 'elementor-test-extension' ) . '</strong>',
- 			'<strong>' . esc_html__( 'Elementor', 'elementor-test-extension' ) . '</strong>'
+ 			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'sendy-elements' ),
+ 			'<strong>' . esc_html__( 'Sendy Elements', 'sendy-elements' ) . '</strong>',
+ 			'<strong>' . esc_html__( 'Sendy Elements', 'sendy-elements' ) . '</strong>'
  		);
 
  		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
@@ -189,9 +188,9 @@
 
  		$message = sprintf(
  			/* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
- 			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'elementor-test-extension' ),
- 			'<strong>' . esc_html__( 'Elementor Test Extension', 'elementor-test-extension' ) . '</strong>',
- 			'<strong>' . esc_html__( 'Elementor', 'elementor-test-extension' ) . '</strong>',
+ 			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'sendy-elements' ),
+ 			'<strong>' . esc_html__( 'Sendy Elements', 'sendy-elements' ) . '</strong>',
+ 			'<strong>' . esc_html__( 'Sendy Elements', 'sendy-elements' ) . '</strong>',
  			 self::MINIMUM_ELEMENTOR_VERSION
  		);
 
@@ -214,51 +213,13 @@
 
  		$message = sprintf(
  			/* translators: 1: Plugin name 2: PHP 3: Required PHP version */
- 			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'elementor-test-extension' ),
- 			'<strong>' . esc_html__( 'Elementor Test Extension', 'elementor-test-extension' ) . '</strong>',
- 			'<strong>' . esc_html__( 'PHP', 'elementor-test-extension' ) . '</strong>',
+ 			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'sendy-elements' ),
+ 			'<strong>' . esc_html__( 'Sendy Elements', 'sendy-elements' ) . '</strong>',
+ 			'<strong>' . esc_html__( 'PHP', 'sendy-elements' ) . '</strong>',
  			 self::MINIMUM_PHP_VERSION
  		);
 
  		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
-
- 	}
-
- 	/**
- 	 * Init Widgets
- 	 *
- 	 * Include widgets files and register them
- 	 *
- 	 * @since 1.0.0
- 	 *
- 	 * @access public
- 	 */
- 	public function init_widgets() {
-
- 		// Include Widget files
- 		require_once( __DIR__ . '/widgets/test-widget.php' );
-
- 		// Register widget
- 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Test_Widget() );
-
- 	}
-
- 	/**
- 	 * Init Controls
- 	 *
- 	 * Include controls files and register them
- 	 *
- 	 * @since 1.0.0
- 	 *
- 	 * @access public
- 	 */
- 	public function init_controls() {
-
- 		// Include Control files
- 		require_once( __DIR__ . '/controls/test-control.php' );
-
- 		// Register control
- 		\Elementor\Plugin::$instance->controls_manager->register_control( 'control-type-', new \Test_Control() );
 
  	}
 

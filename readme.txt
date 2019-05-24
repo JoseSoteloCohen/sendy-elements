@@ -1,13 +1,14 @@
 === Sendy Elements ===
 Contributors: josesotelocohen
-Donate link: https://inboundlatino.com/donate
-Tags: sendy, elementor, forms, newsletters, email marketing
+Donate link: https://compras.inboundlatino.com/sendy-elements/
+Tags: sendy, elementor, forms, newsletters, email marketing, subscription form
 Requires at least: 4.7
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 1
+Stable tag: 1.0.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
+Requires [Elementor Pro](https://elementor.com) 5.2 or greater
 
 Simple plugin that integrates Elementor Pro form widget with Sendy via API.
 
@@ -25,7 +26,7 @@ Simple solution for users of Sendy and Elementor that do not wish to modify the 
 * WordPress 4.7 or greater
 * PHP version 5.4 or greater
 * MySQL version 5.0 or greater
-* Elementor Pro 5.2 or greater
+* [Elementor Pro](https://elementor.com) 2.5 or greater
 
 = We recommend your host supports: =
 
@@ -42,6 +43,7 @@ Simple solution for users of Sendy and Elementor that do not wish to modify the 
 4. Press the 'Edit with Elementor' button.
 5. Now you can drag and drop the form widget of Elementor Pro from the left panel onto the content area, and find the Sendy action in the "Actions after submit" dropdown.
 6. Fill your Sendy List details and all your subscribers will be sent to that list.
+7. Your Sendy URL needs to end in /
 
 
 == Frequently Asked Questions ==
@@ -67,10 +69,15 @@ No, you don't and that's the main reason that I created this plugin, so you can 
 
 1. **Select from the Dropdown.** Just select Sendy from the "Actions After Submit" dropdown in the form widget.
 2. **Sendy List ID.** You can find the list ID in your Sendy Lists dashboard.
-3. **Sendy URL.** This is the domain where you installed Sendy.
+3. **Sendy URL.** This is the domain where you installed Sendy. It must finish with /
 
 
 == Changelog ==
+
+= 1.0.1 - 2019-05-23 =
+* Tweak: Corrected the Elementor version.
+* Tweak: Improved the Installation and Screenshot documentation.
+* Tweak: Removed unnecessary code calling custom widgets.
 
 = 1.0.0 - 2019-05-19 =
 * Initial Release
