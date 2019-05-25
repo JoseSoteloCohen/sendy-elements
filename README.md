@@ -1,14 +1,23 @@
 # Sendy Elements
 **Contributors:** [josesotelocohen](https://profiles.wordpress.org/josesotelocohen/)
+
 **Donate link:** [Click here](https://compras.inboundlatino.com/sendy-elements/)
+
 **Tags:** sendy, elementor, forms, newsletters, email marketing, subscription form
+
 **Requires at least:** 4.7
+
 **Tested up to:** 5.2
+
 **Requires PHP:** 5.4
+
 **Stable tag:** 1.0.1
+
 **License:** GPLv3
+
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html
-Requires [Elementor Pro](https://elementor.com) 5.2 or greater**
+
+### Requires [Elementor Pro](https://elementor.com) 5.2 or greater ###
 
 Simple plugin that integrates Elementor Pro form widget with Sendy via API.
 
