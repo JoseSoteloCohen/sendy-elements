@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Sendy Elements
  * Description: Plugin to extend Elementor forms with Sendy.
- * Version:     1.0.0
+ * Version:     1.0.1
  * Author:      José Sotelo
  * Author URI:  https://inboundlatino.com/
  * Text Domain: sendy-elements
@@ -163,10 +163,10 @@
  		if ( isset( $_GET['activate'] ) ) unset( $_GET['activate'] );
 
  		$message = sprintf(
- 			/* translators: 1: Plugin name 2: Elementor */
+ 			/* translators: 1: Plugin name 2: Elementor Pro*/
  			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'sendy-elements' ),
  			'<strong>' . esc_html__( 'Sendy Elements', 'sendy-elements' ) . '</strong>',
- 			'<strong>' . esc_html__( 'Sendy Elements', 'sendy-elements' ) . '</strong>'
+ 			'<strong>' . esc_html__( 'Elementor Pro', 'sendy-elements' ) . '</strong>'
  		);
 
  		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
@@ -187,10 +187,10 @@
  		if ( isset( $_GET['activate'] ) ) unset( $_GET['activate'] );
 
  		$message = sprintf(
- 			/* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
- 			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'sendy-elements' ),
+ 			/* translators: 1: Plugin name 2: Elementor Pro 3: Required Elementor Pro version */
+ 			esc_html__( '"%1$s" requires "%2$s" version "%3$s" or greater.', 'sendy-elements' ),
  			'<strong>' . esc_html__( 'Sendy Elements', 'sendy-elements' ) . '</strong>',
- 			'<strong>' . esc_html__( 'Sendy Elements', 'sendy-elements' ) . '</strong>',
+ 			'<strong>' . esc_html__( 'Elementor Pro', 'sendy-elements' ) . '</strong>',
  			 self::MINIMUM_ELEMENTOR_VERSION
  		);
 
