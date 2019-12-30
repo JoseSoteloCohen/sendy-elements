@@ -47,6 +47,11 @@ class Sendy_Action_After_Submit extends \ElementorPro\Modules\Forms\Classes\Acti
 			return;
 		}
 
+		//  Make sure that there is a Sendy API Key
+		if ( empty( $settings['sendy_api_field'] ) ) {
+			return;
+		}
+
 		//  Make sure that there is a Sendy list ID
 		if ( empty( $settings['sendy_list'] ) ) {
 			return;
@@ -79,6 +84,7 @@ class Sendy_Action_After_Submit extends \ElementorPro\Modules\Forms\Classes\Acti
       'name' => $fields[ $settings['sendy_name_field'] ],
 			'email' => $fields[ $settings['sendy_email_field'] ],
 			'list' => $settings['sendy_list'],
+			'api_key' => $settings['sendy_api_field'],
 			'ipaddress' => \ElementorPro\Classes\Utils::get_client_ip(),
 			'referrer' => isset( $_POST['referrer'] ) ? $_POST['referrer'] : '',
 		];
@@ -126,6 +132,15 @@ class Sendy_Action_After_Submit extends \ElementorPro\Modules\Forms\Classes\Acti
 		);
 
 		$widget->add_control(
+			'sendy_api_field',
+			[
+				'label' => __( 'API KEY', 'text-domain' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'description' => __( 'To find it go to Settings (top right corner) -> Your API Key.', 'text-domain' ),
+			]
+		);
+
+		$widget->add_control(
 			'sendy_list',
 			[
 				'label' => __( 'Sendy List ID', 'text-domain' ),
@@ -167,7 +182,8 @@ class Sendy_Action_After_Submit extends \ElementorPro\Modules\Forms\Classes\Acti
 			$element['sendy_url'],
 			$element['sendy_list'],
 			$element['sendy_name_field'],
-			$element['sendy_email_field']
+			$element['sendy_email_field'],
+			$element['sendy_api_field']
 		);
 	}
 }

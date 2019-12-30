@@ -3,12 +3,12 @@ Contributors: josesotelocohen
 Donate link: https://compras.inboundlatino.com/sendy-elements/
 Tags: sendy, elementor, forms, newsletters, email marketing, subscription form
 Requires at least: 4.7
-Tested up to: 5.2
+Tested up to: 5.3.2
 Requires PHP: 5.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
-Requires [Elementor Pro](https://elementor.com) 5.2 or greater
+Requires [Elementor Pro](https://elementor.com) 2.5 or greater
 
 Simple plugin that integrates Elementor Pro form widget with Sendy via API.
 
@@ -73,6 +73,13 @@ No, you don't and that's the main reason that I created this plugin, so you can 
 
 
 == Changelog ==
+
+= 1.0.3 - 2019-12-20 =
+* Solved a bug in which it caused a fatal error when Elementor Pro wasn't active or installed.
+
+= 1.0.2 - 2019-11-26 =
+* ONLY UPDATE IF YOU HAVE THE SENDY VERSION 4.0.3.3 +
+* Added the API Key field that was implemented in Sendy version 4.0.3.3.
 
 = 1.0.1 - 2019-05-23 =
 * Tweak: Corrected the Elementor version.

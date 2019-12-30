@@ -3,8 +3,8 @@
 /**
  * Plugin Name: Sendy Elements
  * Description: Plugin to extend Elementor forms with Sendy.
- * Version:     1.0.1
- * Author:      José Sotelo
+ * Version:     1.0.3
+ * Author:      Jose Sotelo
  * Author URI:  https://inboundlatino.com/
  * Text Domain: sendy-elements
  */
@@ -144,7 +144,13 @@
  		if ( version_compare( PHP_VERSION, self::MINIMUM_PHP_VERSION, '<' ) ) {
  			add_action( 'admin_notices', [ $this, 'admin_notice_minimum_php_version' ] );
  			return;
- 		}
+		 }
+		 
+		 // Check if Elementor Pro Exists
+		 if(!function_exists( 'elementor_pro_load_plugin' )){
+            add_action( 'admin_notices', [ $this, 'admin_notice_missing_main_plugin' ] );
+            return;
+        }
 
  		// Add Plugin actions
     require_once('plugin.php');
