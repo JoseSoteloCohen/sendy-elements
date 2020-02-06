@@ -12,7 +12,12 @@ php:
   - 5.4
 
 env:
-  - WP_PROJECT_TYPE=plugin WP_VERSION=latest WP_MULTISITE=0 WP_TEST_URL=http://localhost:12000 WP_TEST_USER=test WP_TEST_USER_PASS=test
+  - WP_PROJECT_TYPE=plugin
+  - WP_VERSION=latest
+  - WP_MULTISITE=0
+  - WP_TEST_URL=http://localhost:12000
+  - WP_TEST_USER=jsotelocohen@gmail.com
+  - WP_TEST_USER_PASS="$WP_ORG_PASSWORD"
 
 matrix:
   allow_failures:
