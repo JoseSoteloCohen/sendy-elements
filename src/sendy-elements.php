@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Sendy Elements
  * Description: Plugin to extend Elementor forms with Sendy.
- * Version:     1.0.4
+ * Version:     2.0.0
  * Author:      Jose Sotelo
  * Author URI:  https://inboundlatino.com/
  * Text Domain: sendy-elements

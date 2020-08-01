@@ -8,7 +8,7 @@ Requires PHP: 5.4
 Stable tag: 1.0.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
-Requires [Elementor Pro](https://elementor.com) 2.5 or greater
+Requires [Elementor Pro](https://elementor.com) 2.9 or greater
 
 Simple plugin that integrates Elementor Pro form widget with Sendy via API.
 
@@ -76,6 +76,11 @@ No, you don't and that's the main reason that I created this plugin, so you can 
 
 
 == Changelog ==
+
+= 2.0.0 - 2020-08-01 =
+* Improvement: Option for GDPR/CCPA Compliance - thanks to @tmgreen
+* Improvement: The name field force the first character to UPPER CASE - thanks to @tmgreen
+* Improvement: Added custom fields as repeaters so you can add as many as you want
 
 = 1.0.4 - 2020-03-25 =
 * Elementor moved the Utils from Classes to Core, so modified that.

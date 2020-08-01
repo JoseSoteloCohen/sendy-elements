@@ -42,7 +42,8 @@ class Sendy_Action_After_Submit extends \ElementorPro\Modules\Forms\Classes\Acti
 	public function run( $record, $ajax_handler ) {
 		$settings = $record->get( 'form_settings' );
 
-		//  Make sure that there is a Sendy installation url
+
+        //  Make sure that there is a Sendy installation url
 		if ( empty( $settings['sendy_url'] ) ) {
 			return;
 		}
@@ -80,21 +81,33 @@ class Sendy_Action_After_Submit extends \ElementorPro\Modules\Forms\Classes\Acti
 
 		// If we got this far we can start building our request data
 		// Based on the param list at https://sendy.co/api
-		$sendy_data = [
-      'name' => $fields[ $settings['sendy_name_field'] ],
-			'email' => $fields[ $settings['sendy_email_field'] ],
-			'list' => $settings['sendy_list'],
-			'api_key' => $settings['sendy_api_field'],
-			'ipaddress' => \ElementorPro\Core\Utils::get_client_ip(),
-			'referrer' => isset( $_POST['referrer'] ) ? $_POST['referrer'] : '',
-		];
-
-		// add name if field is mapped
-		if ( empty( $fields[ $settings['sendy_name_field'] ] ) ) {
-			$sendy_data['name'] = $fields[ $settings['sendy_name_field'] ];
+		// 
+		// Set GDPR Value
+		if ('yes' === $settings['sendy_gdpr']){
+			$gdpr = 'true';
+		}else{
+			$gdpr = 'false';
 		}
 
-		// Send the request
+        // Populate Sendy Default Fields Only
+        $sendy_data = [
+            'name' => ucfirst($fields[ $settings['sendy_name_field'] ]),
+            'email' => $fields[ $settings['sendy_email_field'] ],
+            'gdpr' => $gdpr,
+            'list' => $settings['sendy_list'],
+            'api_key' => $settings['sendy_api_field'],
+            'ipaddress' => \ElementorPro\Core\Utils::get_client_ip(),
+            'referrer' => isset( $_POST['referrer'] ) ? $_POST['referrer'] : '',
+        ];
+
+        $customFieldsLen = count($settings['sendy_custom_fields']);
+        for($i = 0; $i < $customFieldsLen; $i++){
+            $customFieldName = $settings['sendy_custom_fields'][$i]['custom_field_name'];
+            $customFieldId = $settings['sendy_custom_fields'][$i]['custom_field_id'];
+            $sendy_data[$customFieldName] = $fields[ $customFieldId ];
+        }
+
+        // Send the request
 		wp_remote_post( $settings['sendy_url'] . 'subscribe', [
 			'body' => $sendy_data,
 		] );
@@ -109,7 +122,9 @@ class Sendy_Action_After_Submit extends \ElementorPro\Modules\Forms\Classes\Acti
 	 * @param \Elementor\Widget_Base $widget
 	 */
 	public function register_settings_section( $widget ) {
-		$widget->start_controls_section(
+
+
+        $widget->start_controls_section(
 			'section_sendy',
 			[
 				'label' => __( 'Sendy', 'text-domain' ),
@@ -127,7 +142,7 @@ class Sendy_Action_After_Submit extends \ElementorPro\Modules\Forms\Classes\Acti
 				'placeholder' => 'http://your_sendy_installation/',
 				'label_block' => true,
 				'separator' => 'before',
-				'description' => __( 'Enter the URL where you have Sendy installed', 'text-domain' ),
+				'description' => __( 'Enter the URL where you have Sendy installed, including a trailing /', 'text-domain' ),
 			]
 		);
 
@@ -146,7 +161,7 @@ class Sendy_Action_After_Submit extends \ElementorPro\Modules\Forms\Classes\Acti
 				'label' => __( 'Sendy List ID', 'text-domain' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'separator' => 'before',
-				'description' => __( 'the list id you want to subscribe a user to. This encrypted & hashed id can be found under View all lists section named ID.', 'text-domain' ),
+				'description' => __( 'The list id you want to subscribe a user to. This encrypted & hashed id can be found under View all lists section named ID.', 'text-domain' ),
 			]
 		);
 
@@ -166,6 +181,48 @@ class Sendy_Action_After_Submit extends \ElementorPro\Modules\Forms\Classes\Acti
 			]
 		);
 
+		$widget->add_control(
+			'sendy_gdpr',
+			[
+				'label' => __( 'GDPR/CCPA Compliant:', 'text-domain' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'separator' => 'before',
+				'return_value' => 'yes',
+				'default' => 'no',
+				'description' => __( 'Enable if your form is GDPR and CCPA compliant', 'text-domain' ),
+			]
+        );
+
+        $repeater = new \Elementor\Repeater();
+
+        $repeater->add_control(
+            'custom_field_name', [
+                'label' => __( 'Custom field name', 'plugin-domain' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'description' => __( 'Place the Name of the Sendy Custom Field', 'text-domain' ),
+                'label_block' => true,
+            ]
+        );
+        $repeater->add_control(
+            'custom_field_id', [
+                'label' => __( 'Custom field id', 'plugin-domain' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'description' => __( 'Place the ID of the Elementor Field', 'text-domain' ),
+                'label_block' => true,
+            ]
+        );
+
+        $widget->add_control(
+            'sendy_custom_fields',
+            [
+                'label' => __( 'Custom Fields', 'plugin-domain' ),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $repeater->get_controls(),
+                'title_field' => '{{{ custom_field_name }}}',
+                'separator' => 'before'
+            ]
+        );
+
 		$widget->end_controls_section();
 
 	}
@@ -183,7 +240,11 @@ class Sendy_Action_After_Submit extends \ElementorPro\Modules\Forms\Classes\Acti
 			$element['sendy_list'],
 			$element['sendy_name_field'],
 			$element['sendy_email_field'],
-			$element['sendy_api_field']
+			$element['sendy_api_field'],
+			$element['sendy_custom_fields'],
+			$element['sendy_gdpr'],
+			$element['custom_field_name'],
+			$element['custom_field_id'],
 		);
 	}
 }
