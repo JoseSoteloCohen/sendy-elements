@@ -147,7 +147,7 @@
 		 }
 		 
 		 // Check if Elementor Pro Exists
-		 if(!function_exists( 'elementor_pro_load_plugin' )){
+		 if(!function_exists( 'pro_elements_plugin_load_plugin' ) && !function_exists( 'elementor_pro_load_plugin' )){
             add_action( 'admin_notices', [ $this, 'admin_notice_missing_main_plugin' ] );
             return;
         }
